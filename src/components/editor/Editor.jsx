@@ -6,7 +6,7 @@ import "react-mde/lib/styles/css/react-mde-all.css";
 import '../../App.css'
 
 
-const Editor = ({currentNote,updateNote }) => {
+const Editor = ({currentNote , updateNote }) => {
     const [ selectedTab , setSelectedTab ] = useState("write")
 
     const converter = new Showdown.Converter({
@@ -18,7 +18,7 @@ const Editor = ({currentNote,updateNote }) => {
     return (
         <Editorsbar>
             <ReactMde
-                value={currentNote}
+                value={currentNote.body}
                 onChange={updateNote}
                 selectedTab={selectedTab}
                 onTabChange={setSelectedTab}
