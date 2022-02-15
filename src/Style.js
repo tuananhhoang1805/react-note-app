@@ -37,8 +37,17 @@ export const TextSnippet = styled.h4`
     font-size: 0.8rem;
     font-weight: 400;
     line-height: 1.2rem;
-    color: #4A4E74;
+    
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+`
+
+export const Seclect = styled.div`
+    &.selected-note{
+        background-color: #4A4E74;
+        color : #fff;
+    }
+    color: #4A4E74;
+    
 `
