@@ -1,10 +1,18 @@
 import React from 'react'
-import { NewNoteButton, Sidesbar, TextSnippet } from '../../Style'
-const Sidebar = (props) => {
+import { NewNoteButton, Sidesbar, TextSnippet, Seclect } from '../../Style'
 
-    const newNote = () => {
-        return true
-    }
+
+const Sidebar = (props) => {
+    const noteElement = props.notes.map((note, index) => (
+        <div key={note.id}>
+            <Seclect
+                className={`title ${note.id === props.currentNote.id ? "selected-note" : ""} `}
+                onClick={() => props.setcurrentNoteID(note.id)}
+            >
+                <TextSnippet>Note {index + 1} </TextSnippet>
+            </Seclect>
+        </div>
+    ))
     return (
         <Sidesbar>
             <div 
@@ -16,16 +24,12 @@ const Sidebar = (props) => {
                 }}>
                 <h3 style={{ fontSize: '1.75rem'}}>Notes</h3>
                 <NewNoteButton
-                    onClick={newNote}
+                    onClick={props.newNote}
                 >
                     +
                 </NewNoteButton>
             </div>
-            <div>
-                <div>
-                    <TextSnippet>Note 1</TextSnippet>
-                </div>
-            </div>
+            {noteElement}
         </Sidesbar>
   )
 }
