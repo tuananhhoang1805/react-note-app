@@ -1,4 +1,4 @@
-import React, { useState }from 'react';
+import React, { useState, useEffect }from 'react';
 import { customAlphabet } from 'nanoid';
 import Split from 'react-split';
 import Editor from './components/editor/Editor';
@@ -11,18 +11,22 @@ import { NoNote, FirstNoteButton } from './Style'
 
 function App() {
 
-  const [ notes , setNotes ] = useState([])
+  const [ notes , setNotes ] = useState(() => 
+    JSON.parse(localStorage.getItem('notes')) || []
+  )
   const [ currentNoteID, setCurrentNoteID ] = useState([notes[0] && notes[0].id] || 0)
   const nanoid = customAlphabet('1234567890', 10)
+
+  useEffect(() => {
+      localStorage.setItem('notes', JSON.stringify(notes))
+  },[notes])
   function createNotes(){
     const newNote ={
       id: nanoid(),
       body: "# Type note's title in here"
     }
-    setNotes(prevNote => [...prevNote, newNote])
+    setNotes(prevNote => [newNote , ...prevNote])
     setCurrentNoteID(newNote.id)
-    console.log(notes)
-    console.log(currentNoteID)
   }
 
   function findCurrentNote(){
@@ -38,8 +42,6 @@ function App() {
                 oldNote
       }))
   }
-  console.log(findCurrentNote())
-  console.log(notes[0])
   console.log(notes)
   console.log(currentNoteID)
   return (
