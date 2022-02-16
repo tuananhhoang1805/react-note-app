@@ -19,7 +19,9 @@ function App() {
 
   useEffect(() => {
       localStorage.setItem('notes', JSON.stringify(notes))
+      console.log("run")
   },[notes])
+
   function createNotes(){
     const newNote ={
       id: nanoid(),
@@ -36,11 +38,24 @@ function App() {
   }
 
   function updateNote(text){
-      setNotes(oldNote => oldNote.map(oldNote => {
-        return oldNote.id === currentNoteID ?
-                {...oldNote, body: text} :
-                oldNote
-      }))
+      setNotes(oldNotes => {
+        const newArry = [];
+        for (let i = 0; i < oldNotes.length; i++) {
+            const oldNote = oldNotes[i];
+            if (oldNote.id === currentNoteID) {
+                newArry.unshift({ ...oldNote, body: text })
+            }
+            else{
+              newArry.push(oldNote)
+            }
+        }
+        return newArry
+      })
+  }
+
+  function deleteNote(noteID){
+    setNotes(oldNote => oldNote.filter(note => note.id !== noteID))
+    console.log(noteID)
   }
   console.log(notes)
   console.log(currentNoteID)
@@ -58,6 +73,7 @@ function App() {
               currentNote={findCurrentNote()}
               newNote ={createNotes}
               setcurrentNoteID={setCurrentNoteID}
+              deleteNote={deleteNote}
           />
           <Editor 
               currentNote={findCurrentNote()}
