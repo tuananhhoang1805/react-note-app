@@ -1,16 +1,23 @@
 import React from 'react'
-import { NewNoteButton, Sidesbar, TextSnippet, Seclect } from '../../Style'
+import { NewNoteButton, Sidesbar, TextSnippet, Seclect, Trash , TrashButton} from '../../Style'
 
 
 const Sidebar = (props) => {
-    const noteElement = props.notes.map((note, index) => (
-        <div key={note.id}>
+    const noteElement = props.notes.map((note) => (
+        <div key={note.id} >
             <Seclect
                 className={`title ${note.id === props.currentNote.id ? "selected-note" : ""} `}
                 onClick={() => props.setcurrentNoteID(note.id)}
-            >
-                <TextSnippet>Note {index + 1} </TextSnippet>
+                >
+                    <TextSnippet>{ note.body.split('\n')[0]}</TextSnippet>
+                    <TrashButton
+                      
+                        onClick={() => props.deleteNote(note.id)}
+                    >
+                        <Trash className="gg-trash trash-icon"></Trash>
+                    </TrashButton>
             </Seclect>
+            
         </div>
     ))
     return (
