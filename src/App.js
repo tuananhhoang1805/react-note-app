@@ -8,7 +8,6 @@ import { NoNote, FirstNoteButton } from './Style'
 
 
 
-
 function App() {
 
   const [ notes , setNotes ] = useState(() => 
@@ -61,6 +60,7 @@ function App() {
   console.log(currentNoteID)
   return (
    <main>
+     
       {notes.length > 0 
       ?
       <Split
