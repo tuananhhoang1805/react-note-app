@@ -7,8 +7,5 @@ Features :
 - Move modified notes to the top off the list
 
 
-Youtube reference : 
-https://scrimba.com/playlist/pYkgpAP
-
 Demo App: 
 https://pensive-jones-b0833e.netlify.app/
